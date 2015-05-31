@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">BeFit</string>
+    <string name="hello_world">Hello World!</string>
+    <string name="my_profile">My Profile</string>
+    <string name="my_exercise">My Exercise</string>
+    <string name="my_nutrition">My Nutrition</string>
+    <string name="text_date"> Date</string>
+    <string name="text_breakfast">Breakfast</string>
+    <string name="text_lunch">Lunch</string>
+    <string name="text_dinner">Dinner</string>
+    <string name="button_add_food">Add Food</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="button_save_calendar">Save to Calendar</string>
+    <string name="food_title">Food</string>
+    <string name="food_label">Food Name</string>
+    <string name="brand_label">Restaurant/Brand</string>
+    <string name="serving_label">Serving Size</string>
+    <string name="radio_breakfast">Breakfast</string>
+    <string name="radio_lunch">Lunnch</string>
+    <string name="radio_dinner">Dinner</string>
+    <string name="action_settings">Settings</string>
+    <string name="add_food">Add Food</string>
+    <string name="date_format">mm/dd/yy</string>
+
+</resources>
