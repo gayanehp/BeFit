@@ -18,14 +18,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private String[] projection={
             Contract.FoodEntry._ID,
-            Contract.FoodEntry.BRAND,
-            Contract.FoodEntry.BREAKFAST,
-            Contract.FoodEntry.CALORIES,
-            Contract.FoodEntry.DINNER,
+           // Contract.FoodEntry.ITEM_ID,
             Contract.FoodEntry.ITEM,
-            Contract.FoodEntry.LUNCH,
-            Contract.FoodEntry.TYPE,
+            Contract.FoodEntry.BRAND,
+            Contract.FoodEntry.QUANTITY,
             Contract.FoodEntry.UNIT,
+            Contract.FoodEntry.CALORIES,
+            Contract.FoodEntry.BREAKFAST,
+            Contract.FoodEntry.DINNER,
+            Contract.FoodEntry.LUNCH,
+
 
     };
 
@@ -33,10 +35,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             "CREATE TABLE " +
                     Contract.FoodEntry.TABLE_NAME + " (" +
                     Contract.FoodEntry._ID + " INTEGER PRIMARY KEY, " +
+                 //   Contract.FoodEntry.ITEM_ID + "TEXT NOT NULL, " +
                     Contract.FoodEntry.ITEM + " TEXT NOT NULL, " +
                     Contract.FoodEntry.BRAND + " TEXT NOT NULL, " +
-                    Contract.FoodEntry.TYPE + " INTEGER NOT NULL, " +
-                    Contract.FoodEntry.UNIT + " INTEGER NOT NULL, " +
+                    Contract.FoodEntry.QUANTITY + " INTEGER NOT NULL, " +
+                    Contract.FoodEntry.UNIT + "     TEXT NOT NULL, " +
                     Contract.FoodEntry.BREAKFAST + " BOOLEAN NOT NULL, " +
                     Contract.FoodEntry.LUNCH + " BOOLEAN NOT NULL, " +
                     Contract.FoodEntry.DINNER + " BOOLEAN NOT NULL, " +
@@ -66,11 +69,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues cv = new ContentValues();
 
-        cv.put(Contract.FoodEntry._ID, food.getId());
+       // cv.put(Contract.FoodEntry._ID, food.getId());
         cv.put(Contract.FoodEntry.ITEM, food.getItem());
         cv.put(Contract.FoodEntry.BRAND, food.getBrand());
-        cv.put(Contract.FoodEntry.TYPE, food.getType());
-        cv.put(Contract.FoodEntry.UNIT, food.getUpc());
+       // cv.put(Contract.FoodEntry.TYPE, food.getType());
+       // cv.put(Contract.FoodEntry.UNIT, food.getUpc());
         cv.put(Contract.FoodEntry.CALORIES, food.getCalories());
         cv.put(Contract.FoodEntry.BREAKFAST, food.getIsBreakfast() ? 1 : 0);
         cv.put(Contract.FoodEntry.LUNCH, food.getIsLunch() ? 1 : 0);
@@ -95,12 +98,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return db.query(Contract.FoodEntry.TABLE_NAME, projection, Contract.FoodEntry._ID + "==?", ids, null, null, null);
     }
 
-//
-//    public void addRows(List<FlickrPhoto> photos) {
-//        for (FlickrPhoto photo : photos) {
-//            insertPhotoEntry(photo);
-//        }
-//    }
+
+    public void addRows(List<BeFitFood> foods) {
+        for (BeFitFood food : foods) {
+            insertFoodEntry(food);
+        }
+    }
 
     public void clearTable() {
         SQLiteDatabase db = getWritableDatabase();

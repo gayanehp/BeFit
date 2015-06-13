@@ -27,13 +27,21 @@
             android:layout_height="wrap_content"
             android:id="@+id/editText"
             android:layout_gravity="end|right" />
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:visibility="gone"
+            />
 
         <Button
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/button_search_food"
-            android:id="@+id/button"
+            android:id="@+id/search_button"
             android:layout_gravity="right|bottom" />
 
     </FrameLayout>
@@ -56,7 +64,9 @@
             android:layout_gravity="right|top"
             android:inputType="none"
             android:editable="false"
-            android:textIsSelectable="false" />
+            android:textIsSelectable="false"
+            android:autoText="false"
+            android:textSize="@dimen/abc_text_size_small_material" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -99,7 +109,8 @@
             android:layout_gravity="right|center_vertical"
             android:inputType="none"
             android:editable="false"
-            android:textIsSelectable="false" />
+            android:textIsSelectable="false"
+            android:textSize="@dimen/abc_text_size_small_material" />
 
         <EditText
             android:layout_width="167dp"
@@ -180,7 +191,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:id="@+id/frameLayout5"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/frameLayout4"
         android:layout_alignParentStart="true">
 
         <Button

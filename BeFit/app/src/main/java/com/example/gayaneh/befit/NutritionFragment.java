@@ -17,7 +17,7 @@ public class NutritionFragment extends Fragment {
     }
 
     Button food,cancel,save;
-    Fragment foodFragment;
+    Fragment foodFragment,foodListFragment;
     Spinner breakfastSpinner,lunchSpinner,dinnerSpinner;
 
     @Override
@@ -25,12 +25,16 @@ public class NutritionFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view =   inflater.inflate(R.layout.fragment_nutrition, container, false);
 
+
+
         food = (Button) view.findViewById(R.id.buttonFood);
 
         food.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                foodFragment = new FoodFragment();
+
+
+               foodFragment = new FoodFragment();
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
                 ft.replace(R.id.container, foodFragment);
                 // firstTab.setRetainInstance(true);
