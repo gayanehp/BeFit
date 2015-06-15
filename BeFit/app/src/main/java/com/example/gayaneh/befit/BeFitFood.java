@@ -12,23 +12,30 @@ import java.util.ArrayList;
 public class BeFitFood {
 
     private String id,
-            item,brand,serving_unit;
-    private Integer serving_qty,calories;
+            name,brand,servingUnit;
+    private Integer servingQty,calories;
 
     private Boolean breakfast,lunch,dinner;
 
     public BeFitFood (JSONObject jsonFood) throws JSONException{
      //   this.id = (String) jsonFood.optString("item_id");
-        this.item = (String) jsonFood.optString("item_name");
+        this.name = (String) jsonFood.optString("item_name");
         this.brand = (String) jsonFood.optString("brand_name");
         this.calories = (Integer) jsonFood.optInt("nf_calories");
-        this.serving_qty = (Integer) jsonFood.optInt("nf_serving_size_qty");
-        this.serving_unit = (String) jsonFood.optString("nf_serving_size_unit");
+        this.servingQty = (Integer) jsonFood.optInt("nf_serving_size_qty");
+        this.servingUnit = (String) jsonFood.optString("nf_serving_size_unit");
         this.breakfast = false;
         this.lunch = false;
         this.dinner = false;
 
     }
+
+    public BeFitFood (){
+        this.breakfast = false;
+        this.lunch = false;
+        this.dinner = false;
+    }
+
 
     public static ArrayList<BeFitFood> makeFoodList(String foodData) throws JSONException {
         ArrayList<BeFitFood> befitFoods = new ArrayList<>();
@@ -49,20 +56,20 @@ public class BeFitFood {
 //        return id;
 //    }
 
-    public String getItem() {
-        return item;
+    public String getName() {
+        return name;
     }
 
     public String getBrand() {
         return brand;
     }
 
-    public String getServing_unit() {
-        return serving_unit;
+    public String getServingUnit() {
+        return servingUnit;
     }
 
-    public Integer getServing_qty() {
-        return serving_qty;
+    public Integer getServingQty() {
+        return servingQty;
     }
 
     public Integer getCalories() {
@@ -73,20 +80,20 @@ public class BeFitFood {
 //        this.id = id;
 //    }
 
-    public void setItem(String item) {
-        this.item = item;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setBrand(String brand) {
         this.brand = brand;
     }
 
-    public void setServing_unit(String serving_unit) {
-        this.serving_unit = serving_unit;
+    public void setServingUnit(String serving_unit) {
+        this.servingUnit = serving_unit;
     }
 
-    public void setServing_qty(Integer serving_qty) {
-        this.serving_qty = serving_qty;
+    public void setServingQty(Integer serving_qty) {
+        this.servingQty = serving_qty;
     }
 
     public void setCalories(Integer calories) {

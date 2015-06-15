@@ -2,6 +2,7 @@ package com.example.gayaneh.befit;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class NutritionFragment extends Fragment {
@@ -23,6 +27,7 @@ public class NutritionFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View view =   inflater.inflate(R.layout.fragment_nutrition, container, false);
 
 
@@ -41,10 +46,38 @@ public class NutritionFragment extends Fragment {
                 ft.commit();
             }
         });
+        DatabaseHelper dbHelper= new DatabaseHelper( getActivity().getApplicationContext());
+        Cursor cursor =dbHelper.getAllRows();
+        getActivity().startManagingCursor(cursor);
+        int foodCount = cursor.getCount();
+        String foodName;
+        int isBreakfast,isLunch,isDinner;
+        List<String> breakfastList = new ArrayList<String>(); //= {"Spanish Omelette","Oatmeal","Ham Sandwich"};
+        List<String> lunchList = new ArrayList<String>();  //= {"Chicken Salad","Fish and Chips","Tomato Soup"};
+        List<String> dinnerList = new  ArrayList<String>(); // = {"Kale Salad","Steak","Sushi Roll"};
+        cursor.moveToFirst();
+        for (int i= 1; i<=foodCount; i++ ){
+            foodName = cursor.getString(cursor.getColumnIndexOrThrow(Contract.FoodEntry.ITEM))+
+                              "-" +cursor.getString(cursor.getColumnIndexOrThrow(Contract.FoodEntry.BRAND));
+            isBreakfast = cursor.getInt((cursor.getColumnIndexOrThrow(Contract.FoodEntry.BREAKFAST)));
+            isLunch = cursor.getInt((cursor.getColumnIndexOrThrow(Contract.FoodEntry.LUNCH)));
+            isDinner = cursor.getInt((cursor.getColumnIndexOrThrow(Contract.FoodEntry.DINNER)));
 
-        String[] breakfastList = {"Spanish Omelette","Oatmeal","Ham Sandwich"};
-        String[] lunchList = {"Chicken Salad","Fish and Chips","Tomato Soup"};
-        String[] dinnerList = {"Kale Salad","Steak","Sushi Roll"};
+            if (isBreakfast == 1 ){
+                breakfastList.add(foodName);
+            }
+            if (isLunch == 1 ){
+                lunchList.add(foodName);
+            }
+            if (isDinner == 1){
+                dinnerList.add(foodName);
+            }
+            cursor.moveToNext();
+
+        }
+
+        //title.setText(titleText);
+
         breakfastSpinner = (Spinner) view.findViewById(R.id.spinnerBreakfast);
         lunchSpinner = (Spinner) view.findViewById(R.id.spinnerLunch);
         dinnerSpinner = (Spinner) view.findViewById(R.id.spinnerDinner);

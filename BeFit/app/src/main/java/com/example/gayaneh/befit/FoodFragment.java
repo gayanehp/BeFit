@@ -1,5 +1,6 @@
 package com.example.gayaneh.befit;
 
+import android.app.ActionBar;
 import android.app.Fragment;
 
 import android.app.FragmentManager;
@@ -17,7 +18,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -26,6 +26,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -41,7 +42,8 @@ public class FoodFragment extends Fragment {
     CheckBox ckBreakfast,ckLunch,ckDinner;
     private ProgressBar progress;
     boolean isBreakfast,isLunch,isDinner = false;
-    Bundle args,nutritionArgs = null;
+    Bundle args,foodBundle = null;
+
 
 
     @Override
@@ -51,26 +53,16 @@ public class FoodFragment extends Fragment {
         args = getArguments();
         if (args != null)
         {
-            nutritionArgs = new Bundle();
             String[] foodSpecs= (String[]) args.getSerializable("foodSpecs");
-            String foodName=foodSpecs[0];
-            String foodBrand = foodSpecs[1];
-            String foodServing = foodSpecs[3];
-            String foodSize = foodSpecs[2];
-            String calories = foodSpecs[4];
-            nutritionArgs.putSerializable("foodName",foodName);
-            nutritionArgs.putSerializable("foodBrand",foodBrand);
-            nutritionArgs.putSerializable("foodServing",foodServing);
-            nutritionArgs.putSerializable("foodSize",foodSize);
-            nutritionArgs.putSerializable("calories",calories);
+
             EditText foodText = (EditText) view.findViewById(R.id.editText2);
-            foodText.setText(foodName);
+            foodText.setText(foodSpecs[0]);
             EditText brandText = (EditText) view.findViewById(R.id.editText4);
-            brandText.setText(foodBrand);
+            brandText.setText(foodSpecs[1]);
             EditText servingText = (EditText) view.findViewById(R.id.editText5);
-            servingText.setText(foodSize+" "+foodServing);
+            servingText.setText(foodSpecs[2]+" "+ foodSpecs[3]);
             EditText caloriesText = (EditText) view.findViewById(R.id.editText3);
-            caloriesText.setText(calories);
+            caloriesText.setText(foodSpecs[4]);
         }
          return view;
     }
@@ -120,27 +112,42 @@ public class FoodFragment extends Fragment {
                 isDinner=true;
             }
         });
-
-
-
-
         ckLunch = (CheckBox) view.findViewById(R.id.checkBoxLunch);
         ckDinner = (CheckBox) view.findViewById(R.id.checkBoxDinner);
         add = (Button) view.findViewById(R.id.buttonAddFood);
+        cancel = (Button) view.findViewById(R.id.buttonCancel);
+        cancel.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                FragmentManager fm = getActivity().getFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                //  MainActivity mainActivity = (MainActivity) getActivity();
+                Fragment nutritionFragment = new NutritionFragment();
+                ft.replace(R.id.container, nutritionFragment);
+                ft.commit();
+            }
+        });
+
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                BeFitFood food = new BeFitFood();
                 FragmentManager fm = getActivity().getFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
-                MainActivity mainActivity = (MainActivity) getActivity();
-                Fragment nutritionFragment = mainActivity.getFragmentManager().findFragmentById(R.layout.fragment_nutrition);
-
-
-                nutritionArgs.putSerializable("isBreakfast", isBreakfast);
-                nutritionArgs.putSerializable("isLunch", isLunch);
-                nutritionArgs.putSerializable("isDinner",isDinner);
-                nutritionFragment.setArguments(nutritionArgs);
+              //  MainActivity mainActivity = (MainActivity) getActivity();
+                Fragment nutritionFragment = new NutritionFragment();// mainActivity.getFragmentManager().findFragmentById(R.layout.fragment_nutrition);
+                String[] foodSpecs = (String[]) args.getSerializable("foodSpecs");
+                food.setName(foodSpecs[0]);
+                food.setBrand(foodSpecs[1]);
+                food.setServingQty(Integer.parseInt(foodSpecs[2]));
+                food.setServingUnit(foodSpecs[3]);
+                food.setCalories(Integer.parseInt(foodSpecs[4]));
+                food.setIsBreakfast(isBreakfast);
+                food.setIsLunch(isLunch);
+                food.setIsDinner(isDinner);
+                DatabaseHelper dbHelper = new DatabaseHelper(getActivity().getApplicationContext());
+                dbHelper.addRow(food);
                 ft.replace(R.id.container, nutritionFragment);
                 ft.commit();
 
@@ -175,8 +182,8 @@ public class FoodFragment extends Fragment {
         FragmentTransaction ft = fm.beginTransaction();
         ArrayList<String>  rows = new ArrayList<String>();
         for( BeFitFood f:foods ){
-            String item = f.getItem() + ";" + f.getBrand()+ ";" + f.getServing_qty() + ";" +
-                          f.getServing_unit()+ ";"+ f.getCalories();
+            String item = f.getName() + ";" + f.getBrand()+ ";" + f.getServingQty() + ";" +
+                          f.getServingUnit()+ ";"+ f.getCalories();
             rows.add(item);
         }
         MainActivity mainActivity = (MainActivity) getActivity();

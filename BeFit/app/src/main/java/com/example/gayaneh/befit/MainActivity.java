@@ -36,6 +36,9 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // initialise databaee
+     //   DatabaseHelper dbHelper = new DatabaseHelper(getApplicationContext());
+       // insert some data
         setContentView(R.layout.activity_main);
         ActionBar actionBar= getActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -63,16 +66,9 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_search, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         // Associate searchable configuration with the SearchView
-        SearchManager searchManager =
-                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView =
-                (SearchView) menu.findItem(R.id.search).getActionView();
-        searchView.setSearchableInfo(
-                searchManager.getSearchableInfo(getComponentName()));
-
-        return true;
+             return true;
 
     }
 
@@ -150,14 +146,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
         }
     }
 
-//    public void startLoadTask(Context c){
-//        if (isOnline()) {
-//            LoadPhotos task = new LoadPhotos();
-//            task.execute();
-//        } else {
-//            Toast.makeText(c, "Not online", Toast.LENGTH_LONG).show();
-//        }
-//    }
+
 
     public boolean isOnline() {
         ConnectivityManager connectivityManager = (ConnectivityManager)

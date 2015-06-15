@@ -40,9 +40,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     Contract.FoodEntry.BRAND + " TEXT NOT NULL, " +
                     Contract.FoodEntry.QUANTITY + " INTEGER NOT NULL, " +
                     Contract.FoodEntry.UNIT + "     TEXT NOT NULL, " +
-                    Contract.FoodEntry.BREAKFAST + " BOOLEAN NOT NULL, " +
-                    Contract.FoodEntry.LUNCH + " BOOLEAN NOT NULL, " +
-                    Contract.FoodEntry.DINNER + " BOOLEAN NOT NULL, " +
+                    Contract.FoodEntry.BREAKFAST + " INTEGER NOT NULL, " +
+                    Contract.FoodEntry.LUNCH + " INTEGER NOT NULL, " +
+                    Contract.FoodEntry.DINNER + " INTEGER NOT NULL, " +
                     Contract.FoodEntry.CALORIES + " INTEGER NOT NULL " + ")";
 
     private static final String SQL_DELETE_ENTRIES =
@@ -70,10 +70,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ContentValues cv = new ContentValues();
 
        // cv.put(Contract.FoodEntry._ID, food.getId());
-        cv.put(Contract.FoodEntry.ITEM, food.getItem());
+        cv.put(Contract.FoodEntry.ITEM, food.getName());
         cv.put(Contract.FoodEntry.BRAND, food.getBrand());
-       // cv.put(Contract.FoodEntry.TYPE, food.getType());
-       // cv.put(Contract.FoodEntry.UNIT, food.getUpc());
+        cv.put(Contract.FoodEntry.QUANTITY, food.getServingQty());
+        cv.put(Contract.FoodEntry.UNIT, food.getServingUnit());
         cv.put(Contract.FoodEntry.CALORIES, food.getCalories());
         cv.put(Contract.FoodEntry.BREAKFAST, food.getIsBreakfast() ? 1 : 0);
         cv.put(Contract.FoodEntry.LUNCH, food.getIsLunch() ? 1 : 0);
@@ -103,6 +103,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         for (BeFitFood food : foods) {
             insertFoodEntry(food);
         }
+    }
+
+    public void addRow(BeFitFood food) {
+
+            insertFoodEntry(food);
+
     }
 
     public void clearTable() {

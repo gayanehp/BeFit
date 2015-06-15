@@ -144,9 +144,9 @@
             android:layout_height="wrap_content"
             android:id="@+id/editText3"
             android:layout_gravity="right|center_vertical"
-            android:inputType="none"
             android:editable="false"
-            android:textIsSelectable="false" />
+            android:textIsSelectable="false"
+            android:inputType="number" />
     </FrameLayout>
     <FrameLayout
         android:layout_width="match_parent"
