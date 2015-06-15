@@ -39,4 +39,27 @@ public class Contract {
         public static final String DINNER="dinner";
 
     }
+
+    public static final class CalendarEntry implements BaseColumns{
+        CalendarEntry ce = new CalendarEntry();
+
+        public static final String TABLE_NAME = "calendar_entry";
+
+        public static final String CDATE = "calendar_date";
+
+        public static final String BREAKFAST = "breakfast";
+
+        public static final String BCALORIES = "breakfast_calories";
+
+        public static final String LUNCH = "lunch";
+
+        public static final String LCALORIES = "lunch_calories";
+
+        public static final String DINNER = "dinner";
+
+        public static final String DCALORIES = "dinner_calories";
+
+
+
+    }
 }

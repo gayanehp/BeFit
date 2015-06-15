@@ -35,7 +35,7 @@ public class FoodListFragment extends Fragment implements AdapterView.OnItemClic
         foodFragment.setArguments(bundle);
         ft.replace(R.id.container, foodFragment);
         ft.commit();
-    //    mainActivity.switchToA(bundle);
+
 
 
     }

@@ -16,7 +16,7 @@
     <string name="food_title">Food Search</string>
     <string name="food_label">Food Name</string>
     <string name="brand_label">Restaurant/Brand</string>
-    <string name="serving_label">Serving</string>
+    <string name="serving_label">Serv.</string>
     <string name="calories_label"> Calories</string>
     <string name="servin_size_label">Serving Size</string>
     <string name="menu_checkbox_label">Add to the list of:</string>

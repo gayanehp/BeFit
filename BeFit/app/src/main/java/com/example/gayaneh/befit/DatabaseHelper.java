@@ -18,7 +18,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private String[] projection={
             Contract.FoodEntry._ID,
-           // Contract.FoodEntry.ITEM_ID,
             Contract.FoodEntry.ITEM,
             Contract.FoodEntry.BRAND,
             Contract.FoodEntry.QUANTITY,
@@ -26,16 +25,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             Contract.FoodEntry.CALORIES,
             Contract.FoodEntry.BREAKFAST,
             Contract.FoodEntry.DINNER,
-            Contract.FoodEntry.LUNCH,
+            Contract.FoodEntry.LUNCH};
+
+    private String[] projection2={
+            Contract.CalendarEntry._ID,
+            Contract.CalendarEntry.CDATE,
+            Contract.CalendarEntry.BREAKFAST,
+            Contract.CalendarEntry.BCALORIES,
+            Contract.CalendarEntry.LUNCH,
+            Contract.CalendarEntry.LCALORIES,
+            Contract.CalendarEntry.DINNER,
+            Contract.CalendarEntry.DCALORIES
+
 
 
     };
+
 
     private static final String DATABASE_CREATE =
             "CREATE TABLE " +
                     Contract.FoodEntry.TABLE_NAME + " (" +
                     Contract.FoodEntry._ID + " INTEGER PRIMARY KEY, " +
-                 //   Contract.FoodEntry.ITEM_ID + "TEXT NOT NULL, " +
                     Contract.FoodEntry.ITEM + " TEXT NOT NULL, " +
                     Contract.FoodEntry.BRAND + " TEXT NOT NULL, " +
                     Contract.FoodEntry.QUANTITY + " INTEGER NOT NULL, " +
@@ -43,7 +53,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     Contract.FoodEntry.BREAKFAST + " INTEGER NOT NULL, " +
                     Contract.FoodEntry.LUNCH + " INTEGER NOT NULL, " +
                     Contract.FoodEntry.DINNER + " INTEGER NOT NULL, " +
-                    Contract.FoodEntry.CALORIES + " INTEGER NOT NULL " + ")";
+                    Contract.FoodEntry.CALORIES + " INTEGER NOT NULL " + ");"+
+
+            "CREATE TABLE " +
+                    Contract.CalendarEntry.TABLE_NAME + " (" +
+                    Contract.CalendarEntry._ID + " INTEGER PRIMARY KEY, " +
+                    Contract.CalendarEntry.CDATE + " DATE NOT NULL, " +
+                    Contract.CalendarEntry.BREAKFAST +  " TEXT NOT NULL, " +
+                    Contract.CalendarEntry.BCALORIES +  " INTEGER NOT NULL, " +
+                    Contract.CalendarEntry.LUNCH +  " TEXT NOT NULL, " +
+                    Contract.CalendarEntry.LCALORIES + " INTEGER NOT NULL, " +
+                    Contract.CalendarEntry.DINNER + " TEXT NOT NULL, " +
+                    Contract.CalendarEntry.DCALORIES + " INTEGER NOT NULL, " + ")";
+
+
+
 
     private static final String SQL_DELETE_ENTRIES =
             "DROP TABLE IF EXISTS " + Contract.FoodEntry.TABLE_NAME;
@@ -68,8 +92,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void insertFoodEntry(BeFitFood food) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues cv = new ContentValues();
-
-       // cv.put(Contract.FoodEntry._ID, food.getId());
         cv.put(Contract.FoodEntry.ITEM, food.getName());
         cv.put(Contract.FoodEntry.BRAND, food.getBrand());
         cv.put(Contract.FoodEntry.QUANTITY, food.getServingQty());
@@ -97,6 +119,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String[] ids = {String.valueOf(id)};
         return db.query(Contract.FoodEntry.TABLE_NAME, projection, Contract.FoodEntry._ID + "==?", ids, null, null, null);
     }
+
+
 
 
     public void addRows(List<BeFitFood> foods) {
