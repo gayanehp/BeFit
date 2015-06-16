@@ -1,0 +1,7 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" tools:context=".ScientificActivity">
+    <item android:id="@+id/action_Basic"  android:title="@string/action_settings_1"
+        android:orderInCategory="100"  android:showAsAction="ifRoom" />
+    <item android:id="@+id/action_Scientific" android:title="@string/action_settings_2"
+        android:orderInCategory="100" android:showAsAction="ifRoom" />
+</menu>

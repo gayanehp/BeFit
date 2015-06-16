@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">Calculator</string>
+    <string name="action_settings_1">Basic</string>
+    <string name="action_settings_2">Scientific</string>
+    <string name="button_1_1">7</string>
+    <string name="button_1_2">8</string>
+    <string name="button_1_3">9</string>
+    <string name="button_1_4">/</string>
+    <string name="button_2_1">4</string>
+    <string name="button_2_2">5</string>
+    <string name="button_2_3">6</string>
+    <string name="button_2_4">x</string>
+    <string name="button_3_1">1</string>
+    <string name="button_3_2">2</string>
+    <string name="button_3_3">3</string>
+    <string name="button_3_4">-</string>
+    <string name="button_4_1">.</string>
+    <string name="button_4_2">0</string>
+    <string name="button_4_3">=</string>
+    <string name="button_4_4">+</string>
+    <string name="button_s_1_1">Sin</string>
+    <string name="button_s_1_2">Cos</string>
+    <string name="button_s_1_3">Tan</string>
+    <string name="button_s_1_4">i</string>
+    <string name="button_s_2_1">ln</string>
+    <string name="button_s_2_2">log</string>
+    <string name="button_s_2_3">π</string>
+    <string name="button_s_2_4">e</string>
+    <string name="button_s_3_1">%</string>
+    <string name="button_s_3_2">!</string>
+    <string name="button_s_3_3">√</string>
+    <string name="button_s_3_4">^</string>
+    <string name="button_s_4_1">(</string>
+    <string name="button_s_4_2">)</string>
+    <string name="button_s_4_3"></string>
+    <string name="button_s_4_4"></string>
+    <string name="title_activity_scientific">ScientificActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+</resources>
